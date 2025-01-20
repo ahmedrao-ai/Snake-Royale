@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="../assets/icons/ahmedfaraz-icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <title>Snake Mania</title>
+</head>
+<body>
+    <audio src="./assets/audios/score.mp3" id="scoreSound"></audio>
+    <audio src="./assets/audios/won.mp3" id="winSound"></audio>
+    <audio src="./assets/audios/foul.mp3" id="foulSound"></audio>
+    <!-- HEADER AREA-->
+    <header id="header">
+        <p>By Ahmed Rao</p>
+        <h1>Snake Royale</h1>
+    </header>
+    <!-- MAIN AREA -->
+    <main>
+
+        <!-- MAIN MENU / HOME -->
+        <div class="menu" id="menu">
+            <h2>Menu</h2>
+            <button class="btn" id="levelButton">Play Levels</button>
+            <button class="btn" id="customButton">Play Custom</button>
+        </div>
+
+        <!-- CUSTOM SETTINGS AREA -->
+        <div class="custom-settings hide" id="custom-settings">
+            <form>
+                <h1>Select Custom Options</h1>
+                <div class="form-controls">
+                    <label>Mode</label>
+                    <div>
+                        <input type="radio" name="mode" value="freestyle" checked="checked">Freestyle
+                        <input type="radio" name="mode" value="hurdle">Hurdle
+                        <input type="radio" name="mode" value="boundry">Boundry
+                        <input type="radio" name="mode" value="master">Master
+                    </div>
+                </div>
+                <div class="form-controls">
+                    <label>Board Theme</label>
+                    <div class="radios">
+                        <div>
+                            <input type="radio" name="board" value="orange" checked="checked">
+                            <div class="boxes">
+                                <div class="box" style="background-color: rgb(255, 253, 158);"></div>
+                                <div class="box" style="background-color: rgb(255, 246, 116);"></div>
+                                <div class="box" style="background-color: rgb(255, 246, 116);"></div>
+                                <div class="box" style="background-color: rgb(255, 253, 158);"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <input type="radio" name="board" value="green">
+                            <div class="boxes">
+                                <div class="box" style="background-color: rgb(158, 255, 158);"></div>
+                                <div class="box" style="background-color: rgb(102, 255, 102);"></div>
+                                <div class="box" style="background-color: rgb(102, 255, 102);"></div>
+                                <div class="box" style="background-color: rgb(158, 255, 158);"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <input type="radio" name="board" value="red">
+                            <div class="boxes">
+                                <div class="box" style="background-color: rgb(255, 184, 184);"></div>
+                                <div class="box" style="background-color: rgb(255, 163, 163);"></div>
+                                <div class="box" style="background-color: rgb(255, 163, 163);"></div>
+                                <div class="box" style="background-color: rgb(255, 184, 184);"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-controls">
+                    <label>Snake Theme</label>
+                    <div class="radios">
+                        <div>
+                            <input type="radio" name="snake" value="orange" checked="checked">
+                            <div class="boxes">
+                                <img class="snake-img" src="assets/images/body-orange.png">
+                                <img class="snake-img" src="assets/images/head-orange.png">
+                            </div>
+                        </div>
+                        <div>
+                            <input type="radio" name="snake" value="skyblue">
+                            <div class="boxes">
+                                <img class="snake-img" src="assets/images/body-skyblue.png">
+                                <img class="snake-img" src="assets/images/head-skyblue.png">
+                            </div>
+                        </div>
+                        <div>
+                            <input type="radio" name="snake" value="pink">
+                            <div class="boxes">
+                                <img class="snake-img" src="assets/images/body-pink.png">
+                                <img class="snake-img" src="assets/images/head-pink.png">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-controls">
+                    <label>Food</label>
+                    <div class="radios">
+                        <input type="radio" name="food" value="orange" checked="checked"><img class="food-img" src="assets/images/orange.png">
+                        <input type="radio" name="food" value="cherry"><img class="food-img" src="assets/images/cherry.png">
+                        <input type="radio" name="food" value="apple"><img class="food-img" src="assets/images/apple.png">
+                    </div>
+                </div>
+                <div class="form-controls">
+                    <label>Speed</label>
+                    <div>
+                        <input type="radio" name="speed" value="slow">Slow
+                        <input type="radio" name="speed" value="normal" checked="checked">Normal
+                        <input type="radio" name="speed" value="fast">Fast
+                    </div>
+                </div>
+                <button class="btn" id="ready">Ready</button>
+                <button class="btn home">Home</button>
+            </form>
+        </div>
+
+        <!-- CUSTOM GAME AREA -->
+        <div class="custom-container hide" id="custom-container">
+            <div class="game-box">
+                <p>Score: <span class="score" id="score">0</span></p>
+                <div class="board-container" id="board-container"></div>
+            </div>
+            <div class="controls">
+                <div class="navigation">
+                    <button class="key up" data-direction="up"><i class="fas fa-arrow-up"></i></button>
+                    <div class="row">
+                        <button class="key left" data-direction="left"><i class="fas fa-arrow-left"></i></button>
+                        <button class="key down" data-direction="down"><i class="fas fa-arrow-down"></i></button>
+                        <button class="key right" data-direction="right"><i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+                <button class="btn playing" id="play-pause">Pause</button>
+                <button class="btn" id="settings">Settings</button>
+                <button class="btn home">Home</button>
+            </div>
+        </div>
+
+        <!-- LEVELS MAIN MENU AREA -->
+        <div class="levels-menu-container hide" id="levels-menu-container">
+            <h1>All Levels</h1>
+            <div class="levels-menu">
+                <div class="level-box" id="1">1</div>
+                <div class="level-box" id="2">2</div>
+                <div class="level-box" id="3">3</div>
+                <div class="level-box" id="4">4</div>
+                <div class="level-box" id="5">5</div>
+            </div>
+            <button class="btn home">Home</button> 
+        </div>
+
+        <!-- LEVEL GAME AREA -->
+        <div class="levels-container hide" id="levels-container">
+            <div class="game-box">
+                <h2>Level: <span id="level">1</span></h2>
+                <p>Score: <span class="score" id="score">0</span></p>
+                <div class="board-container" id="board-container"></div>
+                <div class="controls">
+                    <div class="navigation">
+                        <button class="key up" data-direction="up"><i class="fas fa-arrow-up"></i></button>
+                        <div class="row">
+                            <button class="key left" data-direction="left"><i class="fas fa-arrow-left"></i></button>
+                            <button class="key down" data-direction="down"><i class="fas fa-arrow-down"></i></button>
+                            <button class="key right" data-direction="right"><i class="fas fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                    <button class="btn home">All Levels</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- DETAILS BOX - POPUP -->
+        <div class="detail-box hide" id="detail-box">
+            <h2 class="heading-detail" id="heading-detail">Level: 1 (Details)</h2>
+            <p>Mode: <span class="mode-detail" id="mode-detail">Freestyle</span></p>
+            <p>Speed: <span class="speed-detail" id="speed-detail">Slow</span></p>
+            <p>Score <span class="level-score-detail" id="level-score-detail">20</span> to win</p>
+            <button class="btn" id="start-level">Start</button>
+            <small>You can use <span>Arrow Keys</span> or <span>(W,A,S & D) Keys</span> on <span>keyboard</span> OR <span>Screen buttons</span> to move</small>
+        </div>
+
+        <!-- MESSAGE BOX - POPUP -->
+        <div class="message-box hide" id="message-box">
+            <h1 class="main-message" id="main-message">Main Message</h1>
+            <!-- <p class="sub-message" id="sub-message"></p><span class="foul" id="foul"></span> -->
+            <p class="error-message" id="error-message">Your Foul: <span class="foul" id="foul">Foul Message</span></p>
+            <button class="btn home">Home</button>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

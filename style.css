@@ -1,0 +1,497 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+*:focus {
+    outline: 0;
+}
+
+:root {
+    --color: rgb(0, 255, 191);
+}
+
+::selection {
+    background-color: none;
+    color: none;
+}
+
+::-moz-selection {
+    background-color: none;
+    color: none;
+}
+
+body{
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+@media screen and (min-width: 800px){
+    body {
+        overflow-y: hidden;
+    }
+}
+
+header {
+    background-color: black;
+    color: white;
+    width: 100%;
+    text-align: center;
+}
+
+header > p {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 5px;
+    letter-spacing: 1px;
+}
+
+header > h1 {
+    padding: 30px;
+    letter-spacing: 1px;
+}
+
+.board-container {
+    display: grid;
+    grid-template-columns: repeat(20,20px);
+    border: 0px dashed black;
+    letter-spacing: 1px;
+}
+
+.box {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    transform: rotateZ(0deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.box img {
+    width: inherit;
+    height: inherit;
+}
+
+
+@media (max-width: 425px) {
+    .board-container {
+        grid-template-columns: repeat(20,15px);
+    }
+    .box {
+        width: 15px;
+        height: 15px;
+    }
+}
+
+@media (max-width: 300px) {
+    .board-container {
+        grid-template-columns: repeat(20,10px);
+    }
+    .box {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 100px);
+    padding: 10px 2vmax;
+}
+
+.menu {
+    box-shadow: 0 0 5px gray;
+    padding: 20px;
+    width: 600px;
+    max-width: 100%;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 250px;
+}
+
+.menu h2 {
+    align-self: start;
+    padding: 20px;
+    border-bottom: 2px  solid black;
+    width: 100%;
+}
+
+.btn {
+    cursor: pointer;
+    width: 200px;
+    padding: 20px;
+    border: 0;
+    border-radius: 5px;
+    background-color: var(--color);
+    font-size: 18px;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+.levels-container {
+    width: 600px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.levels-container .btn {
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.levels-menu-container {
+    width: 400px;
+    max-width: 100%;
+    text-align: center;
+}
+
+.levels-menu-container > h1 {
+    padding: 10px;
+    border-bottom: 2px solid black;
+    margin-bottom: 10px;
+}
+
+.levels-menu {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    border-bottom: 2px solid black;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.level-box {
+    background-color: var(--color);
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+    border-radius: 10px;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.level-box:active {
+    transform: scale(0.95);
+}
+
+.game-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.game-box > h2 {
+    align-self: flex-start;
+    border-bottom: 2px solid black;
+}
+
+.detail-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(1);
+    background-color: white;
+    padding: 30px;
+    width: 700px;
+    height: 300px;
+    max-width: 90%;
+    box-shadow: 0 0 5px black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 300ms linear;
+}
+
+.detail-box > h2 {
+    border-bottom: 2px solid var(--color);
+    width: 100%;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+}
+
+.detail-box > p {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.detail-box span {
+    color: red;
+}
+
+.detail-box > small {
+    padding: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: justify;
+}
+
+.game-box p {
+    padding: 5px;
+    font-size: 18px;
+}
+
+.game-box p > .score {
+    font-weight: bold;
+    color: red;
+    font-size: 20px;
+}
+
+.custom-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.controls {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top: 50%;
+    left: 110%;
+    transform: translateY(-50%);
+}
+
+.levels-container .controls {
+    left: 70%;
+}
+
+@media screen and (max-width: 800px){
+    .custom-container {
+        flex-direction: column;
+    }
+    .controls {
+        margin-top: 10px;
+        position: unset;
+        top: 0;
+        left: 0;
+        transform: translateY(0%);
+    }
+}
+
+.controls > button {
+    margin: 5px 0;
+}
+
+.message-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(1);
+    background-color: white;
+    padding: 30px;
+    width: 700px;
+    height: 300px;
+    max-width: 90%;
+    box-shadow: 0 0 5px black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 300ms ease-in;
+}
+
+.message-box h1 {
+    margin-bottom: 10px;
+}
+
+.error-message {
+    margin-bottom: 10px;
+    display: none;
+}
+
+.error-message.show{
+    display: block;
+}
+
+.message-box span {
+    color: red;
+    font-weight: bold;
+}
+
+.custom-settings {
+    width: 600px;
+    max-width: 100%;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px gray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-settings h1 {
+    text-align: center;
+}
+
+.custom-settings label {
+    font-weight: 400;
+    font-size: 18px;
+}
+
+form {
+    width: 100%;
+}
+
+.form-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid lightgray;
+}
+
+.form-controls:first-of-type {
+    border-top: 0px;
+}
+
+@media screen and (max-width: 425px){
+    .form-controls:first-of-type div {
+        display: grid;
+        grid-template-columns: repeat(6,1fr);
+    }
+}
+
+@media screen and (max-width: 320px){
+    .form-controls:first-of-type div {
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+    }
+}
+
+.form-controls > div {
+    margin-top: 5px;
+}
+
+
+input {
+    cursor: pointer;
+    margin-right: 2px;
+    margin-left: 10px;
+}
+
+.boxes {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    width: 40px;
+}
+
+@media (max-width: 425px) {
+    .boxes {
+        width: 30px;
+    }
+}
+
+@media (max-width: 300px) {
+    .boxes {
+        width: 20px;
+    }
+}
+
+.radios {
+    display: flex;
+    align-items: center;
+}
+
+.radios > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+}
+
+.snake-img {
+    width: 20px;
+    height: 20px;
+}
+
+.food-img {
+    width: 30px;
+    height: 30px;
+}
+
+form button {
+    margin-top: 20px;
+}
+
+.navigation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 15px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid darkgray;
+}
+
+.row {
+    margin-top: 5px;
+}
+
+.key {
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    background-color: rgb(168, 62, 255);
+    color: yellow;
+    border: 0;
+    border-radius: 5px;
+    font-size: 20px;
+    margin-bottom: 0;
+}
+
+.key:active {
+    transform: scale(0.95);
+    background-color: rgb(192, 115, 255);
+}
+
+.custom-container.hide,
+.menu.hide,
+.levels-container.hide,
+.levels-menu-container.hide,
+.custom-settings.hide {
+    display: none;
+}
+
+.detail-box.hide,
+.message-box.hide {
+    transform: translate(-50%,-50%) scale(0);
+}
