@@ -14,4 +14,4 @@ Ahmed Rao and Team
 Army Public College, Saddar  
 
 ### Play it live
-link : snakeroyale
+link : https://snakeroyale.netlify.app/
